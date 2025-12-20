@@ -1,78 +1,66 @@
 export const PROFILE = {
-  // 1. 站点全局信息
+  // 1. 基础 SEO
   site: {
     SEO: {
       title: "DonBox | Product Manager",
-      description: "E-commerce PM with Economics background & AI enthusiast.",
+      description: "E-commerce PM | Economics & AI Enthusiast",
     }
   },
 
-  // 2. 核心定位
+  // 2. 核心个人信息
   intro: {
     name: "Don",
-    role: "E-commerce Product Manager",
-    description: "Bridging the gap between Economic Logic and AI Innovation. 3 years of experience in high-growth e-commerce products.",
+    role: "Product Manager",
+    description: "Bridging the gap between Economic Logic and AI Innovation. Based in China, heading to New Zealand.",
     avatar: "/avatar.jpg", 
   },
 
-  // 3. 关于我
+  // 3. 详细描述
   about: {
-    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. I specialize in building logical, data-driven products.",
+    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. Specializing in AI-driven e-commerce optimization.",
     location: "China / New Zealand",
   },
 
-  // 4. 链接与仓库 (必须确保每个字段都存在)
+  // 4. 社交与链接
   links: {
     twitter: "https://twitter.com/zeroXall",
     github: "https://github.com/donsbox",
     linkedin: "https://linkedin.com/in/donlau",
     mail: "mailto:your-email@example.com",
-    discord: "#",
   },
   repo: "https://github.com/donsbox/donsitenew", 
 
-  // 5. 时区与格言
+  // 5. 杂项
   timezone: "Asia/Shanghai",
   words: [
     "Economic logic defines the floor, AI innovation defines the ceiling.",
-    "Logic is the beginning of wisdom, not the end."
   ],
 
-  // 6. 核心数据列表 (这是解决 .map() 报错的关键，补全所有变体)
+  // 6. 核心数据盒（修复 .map 报错的关键：提供多重命名的空数组备份）
   
-  // 项目列表
+  // 项目 (兼容 projects / projectList)
   projects: [
-    { title: "E-commerce Growth", description: "AI-driven optimization", link: "#" }
+    { title: "E-commerce Optimization", description: "AI data modeling", link: "#" }
   ],
-  
-  // 工作经历 (兼容多种可能的命名)
+  projectList: [],
+
+  // 经历 (兼容 experience / experiences / workExperience)
   experience: [
-    { company: "Tech Firm", position: "Product Manager", start: "2022", end: "Present", tasks: ["Product Strategy"] }
+    { company: "E-commerce Firm", position: "PM", start: "2022", end: "Present", tasks: ["Strategy"] }
   ],
-  experiences: [
-    { company: "Tech Firm", position: "Product Manager", start: "2022", end: "Present", tasks: ["Product Strategy"] }
-  ],
-  workExperience: [
-    { company: "Tech Firm", position: "Product Manager", start: "2022", end: "Present", tasks: ["Product Strategy"] }
-  ],
+  experiences: [],
+  workExperience: [],
 
-  // 教育经历 (兼容多种可能的命名)
+  // 学历 (兼容 studies / education)
   studies: [
-    { title: "Master in Management", institution: "University", start: "2021", end: "2023" }
+    { title: "Master in Management", institution: "University", start: "2021", end: "2023" },
+    { title: "Bachelor in Economics", institution: "University", start: "2017", end: "2021" }
   ],
-  education: [
-    { title: "Master in Management", institution: "University", start: "2021", end: "2023" }
-  ],
+  education: [],
 
-  // 书单 (兼容多种可能的命名)
+  // 书籍 (兼容 books / bookList)
   books: [
     { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki" }
   ],
-  bookList: [
-    { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki" }
-  ],
-
-  // 技能标签
-  skills: ["Product Strategy", "AI", "Economics", "SQL"],
-  mainStack: ["AI Tools", "Product Management", "Data Analysis"]
+  bookList: []
 };
