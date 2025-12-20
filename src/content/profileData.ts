@@ -11,17 +11,17 @@ export const PROFILE = {
   intro: {
     name: "Don",
     role: "Product Manager",
-    description: "Bridging the gap between Economic Logic and AI Innovation. 3 years of experience in e-commerce products.",
+    description: "Bridging the gap between Economic Logic and AI Innovation.",
     avatar: "/avatar.jpg", 
   },
 
   // 3. 关于我
   about: {
-    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. Focused on building data-driven products.",
+    description: "Product Manager with a Management Master's and a Dual Degree in Economics.",
     location: "China / New Zealand",
   },
 
-  // 4. 社交与仓库
+  // 4. 社交与链接 (补全所有可能被调用的字段)
   links: {
     twitter: "https://twitter.com/zeroXall",
     github: "https://github.com/donsbox",
@@ -29,72 +29,40 @@ export const PROFILE = {
   },
   repo: "https://github.com/donsbox/donsitenew", 
 
-  // 5. 杂项配置
+  // 5. 杂项
   timezone: "Asia/Shanghai",
   words: [
     "Economic logic defines the floor, AI innovation defines the ceiling.",
   ],
 
-  // 6. 核心数据盒（确保这些名字与组件匹配）
-  // 这里的数组即便为空也必须保留 []
+  // 6. 核心数据列表 (使用双重命名确保组件能找到 map 的对象)
+  
+  // 项目列表
   projects: [
-    {
-      title: "E-commerce Optimization",
-      description: "Optimizing distribution logic with data models.",
-      link: "https://github.com/donsbox",
-    }
+    { title: "E-commerce Project", description: "Optimization with AI", link: "#" }
   ],
   
-  // 兼容性处理：同时提供 experience 和 experiences
+  // 工作经历 (兼容 experience 和 workExperience)
   experience: [
-    {
-      company: "E-commerce Company",
-      location: "China",
-      position: "Product Manager",
-      start: "2022",
-      end: "Present",
-      tasks: ["Strategy", "AI Implementation"],
-    }
+    { company: "Tech Firm", position: "PM", start: "2022", end: "Present", tasks: ["Strategy"] }
   ],
-  experiences: [
-    {
-      company: "E-commerce Company",
-      location: "China",
-      position: "Product Manager",
-      start: "2022",
-      end: "Present",
-      tasks: ["Strategy", "AI Implementation"],
-    }
+  workExperience: [
+    { company: "Tech Firm", position: "PM", start: "2022", end: "Present", tasks: ["Strategy"] }
   ],
 
-  // 兼容性处理：同时提供 studies 和 education
+  // 教育背景 (兼容 studies 和 education)
   studies: [
-    {
-      title: "Master in Management",
-      institution: "Your University",
-      start: "2021",
-      end: "2023",
-    },
-    {
-      title: "Bachelor in Economics",
-      institution: "Your University",
-      start: "2017",
-      end: "2021",
-    }
+    { title: "Master in Management", institution: "University", start: "2021", end: "2023" }
   ],
   education: [
-    {
-      title: "Master in Management",
-      institution: "Your University",
-      start: "2021",
-      end: "2023",
-    }
+    { title: "Master in Management", institution: "University", start: "2021", end: "2023" }
   ],
 
+  // 兴趣与书籍 (兼容 books 和 list)
   books: [
-    {
-      title: "Rich Dad Poor Dad",
-      author: "Robert Kiyosaki",
-    }
+    { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki" }
+  ],
+  bookList: [
+    { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki" }
   ]
 };
