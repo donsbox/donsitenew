@@ -1,77 +1,42 @@
 export const PROFILE = {
+  // 基础信息
   site: {
     SEO: {
-      //     more complicated description for SEO
-      title: "Tech Tim (@TechTim42) - Learn, Share and Grow ❤️",
-      description:
-        "Learn, Share and Grow ❤️ -- Software Engineer | AWS Professional | Open Source Lover  --☘️ Be more productive, Better in communicating, Contribute more to community. | Tech Tim's New Astro Portfolio",
-    },
+      title: "DonBox | Product Manager",
+      description: "E-commerce PM with Economics background & AI enthusiast.",
+    }
   },
-  timezone: "Australia/Sydney",
-  language: "en-AU",
-  firstName: "Tim",
-  name: "Tech Tim",
-  headLine: "Learn, Share and Grow ❤️",
-  headLine2:
-    "I enjoy providing software solutions and bring ideas to life and solve real-world problems.",
-  website: "https://techtim42.bai.uno",
-  repo: "https://github.com/tim-hub/techtim-astro-bento-portfolio",
-  avatarUrl: "https://techtim42.bai.uno/techtim42.webp",
-  shortIntros: [
-    "💻 Software/AI Engineer | Open Source Lover | Self-starter",
-    "☁️ AWS Professional | AWS Community Builder",
-    "☘️ Passionate about Dev Experience(DX) Improvement and bringing ideas to life",
-    "📈 Unprofessional Investor",
-    "🌱 Part-time blogger and unprofessional Youtuber",
-    "📚 Book reader | 🥏 Frisbee Ultimate Player | 🎲 Board Game Player",
-  ],
-  words: ["As each one has received a gift, minister it to one another"],
-  skills: [
-    "Python / Django",
-    "JavaScript",
-    "Typescript",
-    "AWS",
-    "Cloud Computing",
-    "Kubernetes",
-    "React",
-    "Node.js",
-    "Postgres",
-    "SQL",
-    "Astro",
-  ],
+
+  // 名字与定位
+  intro: {
+    name: "Don",
+    role: "E-commerce Product Manager",
+    description: "Bridging the gap between Economic Logic and AI Innovation. 3 years of experience in high-growth e-commerce products.",
+    avatar: "/avatar.jpg", // 记得在 public 文件夹放一张名为 avatar.jpg 的照片
+  },
+
+  // 关于我 (About Me)
+  about: {
+    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. I specialize in building logical, data-driven products for the digital sector.",
+    location: "Currently in China, moving to New Zealand.",
+  },
+
+  // 社交链接
   links: {
-    github: "https://github.com/tim-hub",
-    medium: "https://medium.com/@TechTim42",
-    twitter: "https://twitter.com/TechTim42",
-    bluesky: "https://bsky.app/profile/techtim.bsky.social",
-    thread: "https://www.threads.net/@techtim2024",
-    mastodon: "https://mastodon.social/@techtim42",
-    youtube: "https://www.youtube.com/@techtim42",
-    stackoverflow: "https://stackoverflow.com/users/5249708/tim",
-    devto: "https://dev.to/timhub",
-    goodreads: "",
+    twitter: "https://twitter.com/zeroXall",
+    github: "https://github.com/donsbox",
+    linkedin: "https://linkedin.com/in/donlau",
   },
-  studies: [
-    // studies, qualifications and certifications
-    {
-      title: "Master of Applied Computing",
-      level: "Master",
-    },
-    {
-      title: "AWS Cloud Professional",
-      institution: "AWS",
-    },
-    {
-      title: "Neo4j Certified Professional",
-      institution: "Neo4j",
-    },
-    {
-      title: "ICAgile Certified Professional",
-      institution: "ICP",
-    },
-    {
-      title: "Full Stack Observability Practitioner",
-      institution: "New Relic",
-    },
+
+  // 你的时区 (改为北京时间)
+  timezone: "Asia/Shanghai",
+
+  // 首页的那句格言 (Words)
+  words: [
+    "Economic logic defines the floor, AI innovation defines the ceiling.",
   ],
+
+  // 项目、教育、经历等数据通常会在这里引用或定义
+  // 注意：如果你选的模版还包含具体的 ExperienceCard 内容，
+  // 请告诉我，我再帮你优化那部分的英文文案。
 };
