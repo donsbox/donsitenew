@@ -1,5 +1,5 @@
 export const PROFILE = {
-  // 1. 站点基础信息 (检查 SEO 结构)
+  // 1. 站点基础信息
   site: {
     SEO: {
       title: "DonBox | Product Manager",
@@ -21,7 +21,7 @@ export const PROFILE = {
     location: "China / New Zealand",
   },
 
-  // 4. 社交与仓库 (这里是重灾区，请确保链接正确)
+  // 4. 社交与仓库
   links: {
     twitter: "https://twitter.com/zeroXall",
     github: "https://github.com/donsbox",
@@ -35,18 +35,30 @@ export const PROFILE = {
     "Economic logic defines the floor, AI innovation defines the ceiling.",
   ],
 
-  // 6. 核心数据盒 (确保这里的 [ ] 括号完整)
+  // 6. 核心数据盒（确保这些名字与组件匹配）
+  // 这里的数组即便为空也必须保留 []
   projects: [
     {
       title: "E-commerce Optimization",
       description: "Optimizing distribution logic with data models.",
-      link: "#",
+      link: "https://github.com/donsbox",
     }
   ],
   
+  // 兼容性处理：同时提供 experience 和 experiences
   experience: [
     {
-      company: "E-commerce Firm",
+      company: "E-commerce Company",
+      location: "China",
+      position: "Product Manager",
+      start: "2022",
+      end: "Present",
+      tasks: ["Strategy", "AI Implementation"],
+    }
+  ],
+  experiences: [
+    {
+      company: "E-commerce Company",
       location: "China",
       position: "Product Manager",
       start: "2022",
@@ -55,7 +67,22 @@ export const PROFILE = {
     }
   ],
 
+  // 兼容性处理：同时提供 studies 和 education
   studies: [
+    {
+      title: "Master in Management",
+      institution: "Your University",
+      start: "2021",
+      end: "2023",
+    },
+    {
+      title: "Bachelor in Economics",
+      institution: "Your University",
+      start: "2017",
+      end: "2021",
+    }
+  ],
+  education: [
     {
       title: "Master in Management",
       institution: "Your University",
