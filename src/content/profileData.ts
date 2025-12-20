@@ -1,5 +1,5 @@
 export const PROFILE = {
-  // 基础信息
+  // 1. 站点基础信息
   site: {
     SEO: {
       title: "DonBox | Product Manager",
@@ -7,36 +7,73 @@ export const PROFILE = {
     }
   },
 
-  // 名字与定位
+  // 2. 名字与定位
   intro: {
     name: "Don",
     role: "E-commerce Product Manager",
     description: "Bridging the gap between Economic Logic and AI Innovation. 3 years of experience in high-growth e-commerce products.",
-    avatar: "/avatar.jpg", // 记得在 public 文件夹放一张名为 avatar.jpg 的照片
+    avatar: "/avatar.jpg", 
   },
 
-  // 关于我 (About Me)
+  // 3. 关于我
   about: {
     description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. I specialize in building logical, data-driven products for the digital sector.",
     location: "Currently in China, moving to New Zealand.",
   },
 
-  // 社交链接
+  // 4. 社交与仓库（之前报错很可能因为少了 repo）
   links: {
     twitter: "https://twitter.com/zeroXall",
     github: "https://github.com/donsbox",
     linkedin: "https://linkedin.com/in/donlau",
   },
+  repo: "https://github.com/donsbox/techtim-astro-bento-portfolio", // 必须保留，用于底部链接
 
-  // 你的时区 (改为北京时间)
+  // 5. 其他必要配置
   timezone: "Asia/Shanghai",
-
-  // 首页的那句格言 (Words)
   words: [
     "Economic logic defines the floor, AI innovation defines the ceiling.",
   ],
 
-  // 项目、教育、经历等数据通常会在这里引用或定义
-  // 注意：如果你选的模版还包含具体的 ExperienceCard 内容，
-  // 请告诉我，我再帮你优化那部分的英文文案。
+  // 6. 核心数据盒（即使目前为空，也必须保留这些 [ ] 符号，否则会报错）
+  projects: [
+    {
+      title: "E-commerce Optimization",
+      description: "Reconstructing distribution logic with AI models.",
+      link: "#",
+    }
+  ],
+  
+  experience: [
+    {
+      company: "E-commerce Tech",
+      location: "China",
+      position: "Product Manager",
+      start: "2022",
+      end: "Present",
+      tasks: ["Product Strategy", "AI Integration", "User Growth"],
+    }
+  ],
+
+  studies: [
+    {
+      title: "Master in Management",
+      institution: "Hohai University", // 这里填入你的学校
+      start: "2021",
+      end: "2023",
+    },
+    {
+      title: "Bachelor in Economics",
+      institution: "University Name",
+      start: "2017",
+      end: "2021",
+    }
+  ],
+
+  books: [
+    {
+      title: "Rich Dad Poor Dad",
+      author: "Robert Kiyosaki",
+    }
+  ]
 };
