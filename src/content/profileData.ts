@@ -1,5 +1,5 @@
 export const PROFILE = {
-  // 1. 站点基础信息
+  // 1. 站点基础信息 (检查 SEO 结构)
   site: {
     SEO: {
       title: "DonBox | Product Manager",
@@ -10,63 +10,57 @@ export const PROFILE = {
   // 2. 名字与定位
   intro: {
     name: "Don",
-    role: "E-commerce Product Manager",
-    description: "Bridging the gap between Economic Logic and AI Innovation. 3 years of experience in high-growth e-commerce products.",
+    role: "Product Manager",
+    description: "Bridging the gap between Economic Logic and AI Innovation. 3 years of experience in e-commerce products.",
     avatar: "/avatar.jpg", 
   },
 
   // 3. 关于我
   about: {
-    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. I specialize in building logical, data-driven products for the digital sector.",
-    location: "Currently in China, moving to New Zealand.",
+    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. Focused on building data-driven products.",
+    location: "China / New Zealand",
   },
 
-  // 4. 社交与仓库（之前报错很可能因为少了 repo）
+  // 4. 社交与仓库 (这里是重灾区，请确保链接正确)
   links: {
     twitter: "https://twitter.com/zeroXall",
     github: "https://github.com/donsbox",
     linkedin: "https://linkedin.com/in/donlau",
   },
-  repo: "https://github.com/donsbox/techtim-astro-bento-portfolio", // 必须保留，用于底部链接
+  repo: "https://github.com/donsbox/donsitenew", 
 
-  // 5. 其他必要配置
+  // 5. 杂项配置
   timezone: "Asia/Shanghai",
   words: [
     "Economic logic defines the floor, AI innovation defines the ceiling.",
   ],
 
-  // 6. 核心数据盒（即使目前为空，也必须保留这些 [ ] 符号，否则会报错）
+  // 6. 核心数据盒 (确保这里的 [ ] 括号完整)
   projects: [
     {
       title: "E-commerce Optimization",
-      description: "Reconstructing distribution logic with AI models.",
+      description: "Optimizing distribution logic with data models.",
       link: "#",
     }
   ],
   
   experience: [
     {
-      company: "E-commerce Tech",
+      company: "E-commerce Firm",
       location: "China",
       position: "Product Manager",
       start: "2022",
       end: "Present",
-      tasks: ["Product Strategy", "AI Integration", "User Growth"],
+      tasks: ["Strategy", "AI Implementation"],
     }
   ],
 
   studies: [
     {
       title: "Master in Management",
-      institution: "Hohai University", // 这里填入你的学校
+      institution: "Your University",
       start: "2021",
       end: "2023",
-    },
-    {
-      title: "Bachelor in Economics",
-      institution: "University Name",
-      start: "2017",
-      end: "2021",
     }
   ],
 
