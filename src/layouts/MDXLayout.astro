@@ -1,31 +1,64 @@
 ---
-import ContentTags from "../components/ContentTags.astro";
-import IndexPageLayout from "./IndexPageLayout.astro";
-
-const {frontmatter} = Astro.props;
-const {title, description, image, startDate, tags, canonical} = frontmatter;
-// frontmatter is from MDX metadata for MD pages, we now use content for data now, we use frontmatter for backward compatibility
+import BaseLayout from "./BaseLayout.astro";
+import { PROFILE } from "../content/profileData";
+import { labels, projectPath, projectsPath, type Language } from "../lib/i18n";
+import { sourceUrl, type Project } from "../lib/projects";
+interface Props { entry: Project; lang: Language; }
+const { entry, lang } = Astro.props;
+const { data } = entry;
+const t = labels[lang];
 ---
-
-<IndexPageLayout title={title} description={description} image={image} subTitle={title} canonicalURL={canonical}>
-  <div class="w-full justify-center flex flex-col">
-    {tags &&
-      <div class="pb-4 mx-auto">
-        <ContentTags tags={tags}/>
-      </div>}
-
-    {
-      startDate &&
-      <div class="text-sm text-light my-2 sr-only mx-auto">
-        {startDate}
-        <!--  screen reader only date-->
+<BaseLayout lang={lang} title={`${data.title} — ${data.subtitle} · ${PROFILE.name}`} description={data.description} pageType="article" alternatePaths={{ "zh-CN": projectPath("zh-CN", data.projectId), en: projectPath("en", data.projectId) }}>
+  <main id="main-content" class="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
+    <a class="text-sm text-muted-foreground" href={projectsPath(lang)}>← {t.back}</a>
+    <header class="mb-8 mt-8 border-b pb-8">
+      <p class="mb-4 text-sm font-medium text-primary">{t[data.stage]}</p>
+      <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">{data.title}</h1>
+      <p class="mt-4 text-xl font-medium">{data.subtitle}</p>
+      <p class="mt-5 max-w-3xl text-base leading-8 text-muted-foreground">{data.description}</p>
+      <ul class="mt-5 flex flex-wrap gap-2 text-xs">{data.tags.map(tag => <li class="rounded-md border px-2 py-1">{tag}</li>)}</ul>
+      <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-muted-foreground">
+        <p>{t.reviewed} <time datetime={data.reviewedAt}>{data.reviewedAt}</time></p>
+        <a href={sourceUrl(entry)} rel="noreferrer" target="_blank" class="underline underline-offset-4">{t.source} ↗</a>
+        <code>{data.revision.slice(0, 7)}</code>
+        <span>{t[data.repositoryAccess]}</span>
       </div>
-    }
+      <p class="mt-4 text-xs text-muted-foreground">{t.contribution}</p>
+    </header>
 
-    <article class="prose mx-auto dark:prose-invert ">
-      <!--required with tailwind typography plugin + prose to render html-->
-      <slot/>
+    <section aria-labelledby="delivery-evidence" class="mb-10">
+      <h2 id="delivery-evidence" class="mb-5 text-lg font-semibold">{t.evidence}</h2>
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border bg-card p-6">
+          <h3 class="mb-4 text-sm font-semibold">{t.verified}</h3>
+          <ul class="list-disc space-y-3 pl-4 text-sm leading-7 text-muted-foreground">{data.deliverables.map(item => <li>{item}</li>)}</ul>
+        </div>
+        <div class="rounded-2xl border bg-secondary/40 p-6">
+          <h3 class="mb-4 text-sm font-semibold">{t.unverified}</h3>
+          <ul class="list-disc space-y-3 pl-4 text-sm leading-7 text-muted-foreground">{data.unverified.map(item => <li>{item}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+
+    <article class="prose prose-neutral max-w-none dark:prose-invert prose-headings:tracking-tight prose-a:underline-offset-4">
+      <slot />
     </article>
-  </div>
 
-</IndexPageLayout>
+    <aside class="mt-12 rounded-2xl border p-6" aria-labelledby="case-scope">
+      <h2 id="case-scope" class="text-sm font-semibold">{t.scope}</h2>
+      <p class="mt-3 text-sm leading-7 text-muted-foreground">{t.scopeNote}</p>
+    </aside>
+    <section class="mt-10" aria-labelledby="case-sources">
+      <h2 id="case-sources" class="mb-4 text-lg font-semibold">{t.sources}</h2>
+      {data.repositoryAccess === "restricted" && <p class="mb-4 text-sm text-muted-foreground">{t.restricted}</p>}
+      <ul class="space-y-4 text-sm">
+        {data.sources.map(source => (
+          <li>
+            <a href={sourceUrl(entry, source.path)} target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">{source.label} ↗</a>
+            <code class="mt-1 block break-words text-xs text-muted-foreground">{source.path}</code>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+projectId: "aiinvest"
+title: "AIinvest / Market Event Canvas"
+stage: "specification"
+order: 2
+reviewedAt: "2026-10-26"
+repository: "https://github.com/donsbox/AIinvest"
+revision: "4de152caf98d7b0de5ade2f47d3583b6ff312a1f"
+repositoryAccess: "public"
+lang: "en"
+subtitle: "Turning event research into traceable investment theses"
+description: "A Market Event Canvas specification connecting events, scenarios, theses and review. Delivered material consists of product definitions, proposed data models, an analysis schema and engineering standards—not a verified running research application."
+tags: ["Problem framing","Decision workflows","Structured AI output"]
+deliverables: ["Goals, scope, workspace structure and core workflow specifications for event-driven research.","Proposed Canvas, Thesis and Review objects with ownership constraints.","AIAnalysis JSON Schema and a baseline of architecture, AI, testing, prompting and delivery documents."]
+unverified: ["Application code for the canvas, market data, live AI analysis, persistence and account isolation.","Actual build, test, deployment and end-to-end acceptance results.","Investment performance, user adoption, business metrics and individual responsibilities."]
+sources: [{"label":"Research workspace goal","path":"AI_Startup_OS_Baseline_v1 2/examples/market-event-canvas/PROJECT_GOAL.md"},{"label":"Canvas & scenario specification","path":"AI_Startup_OS_Baseline_v1 2/examples/market-event-canvas/PRODUCT_SPEC.md"},{"label":"Proposed data model","path":"AI_Startup_OS_Baseline_v1 2/examples/market-event-canvas/DATA_MODEL.md"},{"label":"Layered architecture standard","path":"AI_Startup_OS_Baseline_v1 2/docs/02_architecture_standard.md"},{"label":"AI & agent standard","path":"AI_Startup_OS_Baseline_v1 2/docs/05_ai_agent_standard.md"},{"label":"Testing & acceptance standard","path":"AI_Startup_OS_Baseline_v1 2/docs/08_testing_standard.md"},{"label":"Analysis output JSON Schema","path":"AI_Startup_OS_Baseline_v1 2/schemas/ai-analysis.schema.json"},{"label":"Engineering task checklist","path":"AI_Startup_OS_Baseline_v1 2/TASKS.md"},{"label":"Baseline overview","path":"AI_Startup_OS_Baseline_v1 2/README.md"},{"label":"Baseline file manifest","path":"AI_Startup_OS_Baseline_v1 2/MANIFEST.md"}]
+---
+
+## Problem framing: relationships need to become research objects
+
+Investors following macro, technology and semiconductor events need more than a calendar. They need to record how an event may affect variables, sectors and securities, and which outcomes would support or invalidate a view. A one-off conversation is a weak record of those relationships and makes later review difficult.
+
+The repository’s Market Event Canvas example connects events, relationship nodes, scenarios, theses and reviews. Its intended value is a persistent reasoning chain with explicit validation conditions, rather than automated execution or promised returns.
+
+## Target users, scope and non-goals
+
+The specification targets intermediate investors following US macro, technology and semiconductor markets. Its proposed MVP includes seven-day event coverage, event details, an analysis canvas, structured AI analysis, a watchlist, theses, reviews, mock / seed mode and account isolation requirements.
+
+Non-goals explicitly exclude automatic orders, broker connections, high-frequency signals, social features, copy trading, full backtesting and global multi-asset coverage. This keeps the initial problem centered on forming and reviewing a research thesis. These are specification boundaries, not delivered application capabilities.
+
+## Architecture: organize the workspace around saved research objects
+
+The proposed desktop workspace has an event calendar on the left, a relationship canvas in the center and an AI analyzer on the right.
+
+| Object | Information it holds | Proposed constraint |
+| --- | --- | --- |
+| MarketEvent / EventSource | Timing, consensus, previous and actual values, sectors, tickers and sources | Retain provenance and update times |
+| Canvas / Node / Edge | Relationships among events, variables, sectors, securities, risks and checks | Bind nodes and edges to canvasId |
+| AIAnalysis | Scenarios, inferences, evidence and risks | Record model, prompt / schema versions and latency |
+| InvestmentThesis | Triggers, invalidation conditions, risks and horizon | Bind to ownerId with explicit states |
+| EventReview | Actual outcomes, market reaction and failed assumptions | Bind to ownerId for later review |
+
+The architecture standard proposes a modular monolith: UI → application service → domain → repository / provider adapter → database or external API. This is **architecture guidance**; corresponding business application code is not present in the inspected snapshot.
+
+## Workflow design: move from an event to a falsifiable view
+
+1. **Select an event.** Start from an important event in the next seven days and preserve its source.
+2. **Map transmission.** Connect the event to outcomes, macro variables, sectors, securities and validation indicators.
+3. **Generate scenarios.** The product specification asks for bull / base / bear cases, expectation gaps, transmission paths, risks and invalidation conditions.
+4. **Save a thesis.** Store trigger conditions, horizon and risks. Defined states are draft, watching, triggered, invalidated and completed.
+5. **Review the outcome.** Compare actual results and market reaction with the expected scenario, then record failed assumptions.
+
+The product makes “why this view?” and “when should it be abandoned?” explicit objects. This remains a design intention, without verified user or runtime evidence.
+
+## AI output: separate facts, inferences and invalidation
+
+The committed AIAnalysis JSON Schema requires summary, facts, inferences, risks and invalidation_conditions, with optional recommended_checks. It provides a structural contract; it does not establish analytical correctness.
+
+The richer bull / base / bear, probability and transmission-path requirements live in the example specification and are not fully encoded in that schema. Implementation should reconcile the two, then validate missing sources, conflicting data, malformed JSON, timeouts and mock fallback.
+
+## Delivered artifacts: specifications and an engineering baseline
+
+The inspected deliverables are documents, a schema, prompts, checklists and example specifications. AI_Startup_OS_Baseline defines product principles, layering, data conventions, AI boundaries, testing and release gates. Engineering tasks in TASKS remain unchecked, while top-level product goals still contain unfilled sections.
+
+The defensible outcome is a structured handoff: research objects, workflow boundaries and acceptance criteria that can guide implementation. The material does not establish working market feeds, live AI research, canvas persistence, authentication, data isolation or production deployment.
+
+README and MANIFEST also mention configuration files or directories absent from the tracked tree. Manifest intent must be distinguished from actual file availability.
+
+## Next validation and product measures
+
+Complete the top-level product definition, then implement a minimal path: select an event → map relationships → produce structured analysis → save and reopen a thesis → create a review. Validate ownership, provenance, provider failures and the end-to-end path before claiming readiness.
+
+Useful evaluation directions include the share of saved theses that receive a review, the share of analyses with explicit invalidation conditions, and whether users can reconstruct their earlier reasoning. These are proposals from this case analysis, not recorded operating results or investment returns.
+
+## Attribution and case boundaries
+
+The material comes from the public donsbox/AIinvest snapshot. This case analyzes its specifications and baseline without describing them as a complete investment product. Don’s specific responsibilities and collaboration boundaries remain to be confirmed.

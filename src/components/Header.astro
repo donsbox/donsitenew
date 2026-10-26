@@ -1,62 +1,23 @@
 ---
-import {buttonVariants} from '../components/ui/button'
-import {ModeToggle} from '../components/react/ThemeToggle'
-import {PROFILE} from "../content/profileData";
-
-const SITE = PROFILE.site
+import { ModeToggle } from "./react/ThemeToggle";
+import { PROFILE } from "../content/profileData";
+import { homePath, projectsPath, labels, type Language } from "../lib/i18n";
+interface Props { lang: Language; alternatePaths?: Partial<Record<Language, string>>; }
+const { lang, alternatePaths = {} } = Astro.props;
+const t = labels[lang];
+const other = lang === "en" ? "zh-CN" : "en";
 ---
-
-<header
-  class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
->
-  <div
-    class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0"
-  >
-    <div class="flex gap-6 md:gap-10">
-      <a href="/" class="flex items-center space-x-2">
-        <span class="inline-block font-bold">{PROFILE.name}</span>
-      </a>
-    </div>
-    <div class="flex flex-1 items-center justify-end space-x-4">
-      <nav class="flex items-center space-x-1">
-        <a
-          href="/posts"
-          class={buttonVariants({variant: 'ghost'})}
-        >
-          Blog
-        </a>
-        <a
-          href="/projects"
-          class={buttonVariants({variant: 'ghost'})}
-        >
-          Projects
-        </a>
-        <a
-          href={PROFILE.repo}
-          target="_blank"
-          rel="noreferrer"
-          class={buttonVariants({variant: 'ghost'})}
-        >
-          GitHub
-        </a>
-
-        <ModeToggle transition:persist client:load/>
-      </nav>
-    </div>
+<header class="border-b bg-background/95">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-4 sm:px-8">
+    <a href={homePath(lang)} class="flex items-center gap-3 font-semibold" aria-label={lang === "en" ? "Don — Home" : "Don — 首页"}>
+      <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground text-background" aria-hidden="true">D.</span>
+      <span>{PROFILE.name}</span>
+    </a>
+    <nav class="flex flex-wrap items-center gap-4 text-sm sm:gap-6" aria-label={lang === "en" ? "Main navigation" : "主导航"}>
+      <a href={projectsPath(lang)}>{t.projects}</a>
+      <a href={homePath(lang) + "#contact"}>{t.contact}</a>
+      {alternatePaths[other] && <a href={alternatePaths[other]} lang={other} hreflang={other} class="rounded-full border px-3 py-1">{other === "en" ? "EN" : "中文"}</a>}
+      <ModeToggle label={t.theme} client:load />
+    </nav>
   </div>
 </header>
-
-
-<script is:inline>
-  document.addEventListener('astro:after-swap', function () {
-    if (localStorage.getItem('theme') === 'dark')
-      document.documentElement.classList.toggle('dark', true)
-  })
-
-  const getThemePreference = () => {
-    return localStorage.getItem('theme')
-  }
-
-  const isDark = getThemePreference() === 'dark'
-  document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
-</script>

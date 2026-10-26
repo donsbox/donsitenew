@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "./Card.astro";
+import IntroCard from "./sections/IntroCard.astro";
+import AboutMe from "./sections/AboutMe.astro";
+import Projects from "./sections/Projects.astro";
+import Contact from "./sections/Contact.astro";
+import { labels, homePath, projectsPath, type Language } from "../lib/i18n";
+interface Props { lang: Language; }
+const { lang } = Astro.props;
+const t = labels[lang];
+---
+<BaseLayout lang={lang} alternatePaths={{ "zh-CN": homePath("zh-CN"), en: homePath("en") }}>
+  <main id="main-content" class="mx-auto max-w-6xl space-y-8 px-5 pt-8 sm:px-8 sm:pt-12">
+    <div class="grid gap-4 lg:grid-cols-3">
+      <Card class="lg:col-span-2"><IntroCard lang={lang} /></Card>
+      <Card title={t.focus}><AboutMe lang={lang} /></Card>
+    </div>
+    <section aria-labelledby="selected-work">
+      <div class="mb-5 flex items-center justify-between gap-4">
+        <h2 id="selected-work" class="text-xl font-semibold">{t.selected}</h2>
+        <a href={projectsPath(lang)} class="text-sm text-muted-foreground">{t.all} →</a>
+      </div>
+      <Projects lang={lang} />
+    </section>
+    <Card id="contact" title={t.contact}><Contact lang={lang} /></Card>
+  </main>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import { getProjects } from "../../../lib/projects";
+import MDXLayout from "../../../layouts/MDXLayout.astro";
+export async function getStaticPaths() {
+  return (await getProjects("en")).map(entry => ({
+    params: { slug: entry.data.projectId }, props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<MDXLayout entry={entry} lang="en"><Content /></MDXLayout>

@@ -1,19 +1,17 @@
-## Getting Started
+# Content maintenance
 
-First, run the development server:
+Keep personal identity in src/content/profileData.ts and projects in the Astro projects collection.
 
-```bash
-pnpm run dev
-```
+For every new case:
 
-Check http://localhost:4321/
+1. Inspect the actual source snapshot, rather than relying only on README or a status file.
+2. Add Chinese and English entries with matching projectId, revision, maturity, audit date and source paths.
+3. Distinguish code present, documented requirements, runtime validation and measured outcomes.
+4. Confirm individual responsibilities before claiming authorship or independent delivery.
+5. Add public contacts only after Don confirms them.
+6. Run the build, built-site verification and TypeScript check.
+7. Record material evidence changes in docs/CONTENT_AUDIT.md.
 
-## Project Structure
+A source adapter is not proof of a successful live integration. A specification is not proof of implementation. A repository owner is not automatically the sole author.
 
-A brief overview of the project structure:
-
-- **/public**: Images and other static files.
-- **/src**: Contains all Astro components and pages.
-- **src/styles**: Custom CSS files.
-- **astro.config.mjs**: Main configuration for Astro.
-- **tailwind.config.js**: Configuration for Tailwind CSS.
+Keep original template license attribution in LICENSE and the explicit template-credit link; never present it as Don’s biography or project work.

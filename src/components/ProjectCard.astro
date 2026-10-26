@@ -1,39 +1,26 @@
 ---
-import { Card as ShadcnCard } from './ui/card'
-import { Badge } from './ui/badge'
-
-
-const {
-  as: Tag = 'a',
-  class: className,
-  href,
-  heading,
-  subheading,
-  imagePath,
-  altText,
-  dateStart,
-} = Astro.props
-
-
+import { labels, projectPath, type Language } from "../lib/i18n";
+import type { Project } from "../lib/projects";
+interface Props { project: Project; lang: Language; }
+const { project, lang } = Astro.props;
+const { data } = project;
+const t = labels[lang];
 ---
-
-<Tag href={href} class={`${className}`}>
-  <ShadcnCard
-    className={`transform-y-[-40%] align-start perspective-1200 group relative flex-none transform justify-start overflow-hidden shadow-lg transition duration-75 ease-in-out ${href ? 'cursor-pointer hover:border-primary' : ''} `}
-  >
-    <img
-      src={imagePath}
-      alt={altText}
-      class="h-48 w-full rounded-2xl rounded-bl-none rounded-br-none object-cover"
-      loading="eager"
-    />
-    <div class="flex flex-col gap-y-0.5 px-5 py-4">
-      <h3 class="text-lg font-medium line-clamp-2">{heading}</h3>
-      <h4 class="text-muted-foreground line-clamp-3">{subheading}</h4>
-    </div>
-    <div class="flex flex-wrap px-5 py-2 sr-only">
-      <Badge variant="outline">{dateStart}</Badge>
-    </div>
-    <!--<slot />-->
-  </ShadcnCard>
-</Tag>
+<article class="flex h-full flex-col rounded-2xl border bg-card p-6 sm:p-8" data-project-id={data.projectId}>
+  <div class="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs">
+    <span class="rounded-full bg-secondary px-3 py-1.5 font-medium">{t[data.stage]}</span>
+    <span class="font-mono text-muted-foreground">0{data.order}</span>
+  </div>
+  <h3 class="text-2xl font-semibold tracking-tight">
+    <a href={projectPath(lang, data.projectId)}>{data.title}</a>
+  </h3>
+  <p class="mt-2 font-medium text-primary">{data.subtitle}</p>
+  <p class="mt-4 flex-1 text-sm leading-7 text-muted-foreground">{data.description}</p>
+  <ul class="mt-5 flex flex-wrap gap-2 text-xs" aria-label={lang === "en" ? "Product themes" : "产品主题"}>
+    {data.tags.map(tag => <li class="rounded-md border px-2 py-1">{tag}</li>)}
+  </ul>
+  <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-t pt-5 text-xs">
+    <span class="text-muted-foreground">{t.reviewed} <time datetime={data.reviewedAt}>{data.reviewedAt}</time></span>
+    <a class="font-semibold" href={projectPath(lang, data.projectId)}>{t.read} →</a>
+  </div>
+</article>
