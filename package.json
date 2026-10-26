@@ -24,7 +24,8 @@
     "format": "prettier -w . --cache",
     "preview": "astro preview",
     "start": "astro dev",
-    "verify": "node scripts/verify-built-site.mjs"
+    "verify": "node scripts/verify-built-site.mjs",
+    "typecheck": "astro sync && tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.5",

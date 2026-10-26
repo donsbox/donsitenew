@@ -18,10 +18,10 @@ Open http://localhost:4321/. Chinese is at /; English is at /en/.
 ~~~bash
 corepack pnpm@8.15.5 build
 corepack pnpm@8.15.5 verify
-corepack pnpm@8.15.5 exec tsc --noEmit
+corepack pnpm@8.15.5 typecheck
 ~~~
 
-The build produces eight portfolio pages and a noindex 404 page. Verification checks real project listings, both languages, evidence boundaries, local links and fragments, unique metadata, robots, sitemap and the social image.
+The build produces eight portfolio pages and a noindex 404 page. Verification checks real project listings, both languages, evidence boundaries, local links and fragments, unique metadata, robots, sitemap and the social image. The typecheck command generates Astro collection types before running TypeScript, so it also works on a fresh checkout.
 
 SITE_URL is a **build environment variable**, configured in the shell or hosting provider. Its value must be the confirmed HTTP(S) origin, without a path, query or credentials. No production domain or deployment is assumed.
 

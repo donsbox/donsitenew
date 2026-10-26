@@ -17,7 +17,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec tsc --noEmit
+      - run: pnpm typecheck
       - run: pnpm build && pnpm verify
       - name: Verify production URL generation with a reserved test origin
         run: pnpm build && pnpm verify
