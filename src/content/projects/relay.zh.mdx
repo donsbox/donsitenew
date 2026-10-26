@@ -1,0 +1,68 @@
+---
+projectId: "relay"
+title: "RELAY Social OS"
+stage: "prototype"
+order: 1
+reviewedAt: "2026-10-26"
+repository: "https://github.com/donsbox/aitnt"
+revision: "c2c2db85af18a9367d3b1b3b04956e43361e6b25"
+repositoryAccess: "restricted"
+lang: "zh-CN"
+subtitle: "让内容生产成为可编辑、可复用的工作流"
+description: "面向多平台内容生产，将原始素材、策略选择、X／小红书内容、发布包和复盘组织为连续流程。源码包含本地持久化与模型适配，真实服务及线上运行尚未验证。"
+tags: ["工作流编排","人机协作","内容工具"]
+deliverables: ["React / TypeScript 界面及内容分析、策略、平台输出、发布包工作流源码。","项目、Artifact 和 WorkflowRun 的本地持久化，以及输出编辑与最终版本选择。","手动表现复盘、规则型用户记忆、Seed / 自定义 Playbook 管理及模型网关代码。"]
+unverified: ["真实模型服务的调用成功率、输出质量、成本与线上稳定性。","身份认证、云端数据隔离、真实平台数据接入及自动发布。","真实用户使用结果、增长指标与个人职责分工。"]
+sources: [{"label":"内容分析与策略工作流","path":"src/engine/workflow/runContentWorkflow.ts"},{"label":"平台内容生成","path":"src/engine/workflow/generatePlatformOutputs.ts"},{"label":"编辑与最终版本选择","path":"src/engine/workflow/updatePlatformOutputs.ts"},{"label":"发布包构建","path":"src/engine/workflow/generatePublishingPack.ts"},{"label":"表现数据录入","path":"src/engine/workflow/savePerformanceReview.ts"},{"label":"基于复盘更新记忆","path":"src/engine/workflow/updateUserMemory.ts"},{"label":"模型网关与降级","path":"src/engine/llm/modelGateway.ts"},{"label":"输出结构校验","path":"src/engine/llm/validators.ts"},{"label":"本地存储适配","path":"src/engine/storage/localStorageAdapter.ts"},{"label":"Playbook 检索来源","path":"src/engine/benchmarks/playbookRepository.ts"},{"label":"早期状态文档（部分已过时）","path":"MVP_STATUS.md"}]
+---
+
+## 问题定义：生成更多文案，并不等于完成内容工作
+
+同一份素材面向 X 和小红书，需要不同的表达结构、内容颗粒度与互动方式。一次性生成容易把策略、编辑、发布准备和事后复盘割裂开来，下一次创作也难以复用此前的判断。
+
+RELAY 的产品命题是把这些环节组织成连续流程。核心对象从“聊天回复”转为“可保存、可修改、有上下文的内容资产”。这是一项从现有产品结构推导的产品判断，尚无用户研究或效果数据作为验证。
+
+## 范围与关键取舍
+
+优先服务 X 和小红书，保留共同观点，再按平台生成不同结构的内容。代码明确限制了可生成输出的平台；界面或类型中出现其他平台，不代表这些平台的生产能力已经完成。
+
+人的决策保留在策略选择、内容编辑和最终版本确认。Publishing Pack 将最终内容与发布建议整理成可执行的准备材料；它不等同于已经连接平台的自动发布系统。
+
+## 产品架构：界面、工作流与资产分离
+
+| 层级 | 主要对象或职责 | 产品价值 |
+| --- | --- | --- |
+| 工作界面 | Intake、Strategy、Output Studio、Publishing Pack、Review、Benchmark Library | 让用户按任务推进，而非管理零散提示词 |
+| 工作流 | 解析素材、生成 Brief、检索 Benchmark、生成策略、平台输出与发布包 | 为每一步定义前置条件、完成状态与错误 |
+| 业务资产 | ContentProject、Artifact、WorkflowRun | 关联项目、生成结果和运行记录 |
+| 支撑能力 | LocalStorage、Playbook、模型网关 | 在原型阶段提供可替换的存储与生成入口 |
+
+Artifact 类型覆盖 Brief、策略、平台计划、内容输出、发布包、复盘与用户记忆；其字段包括项目标识、可选运行标识、版本与时间。产物成为后续环节的输入，而不是丢失在一次对话里。
+
+## 工作流设计：把人的判断放在合适的位置
+
+1. **输入与分析。** 输入素材、目标与平台，生成 Brief，检索 Playbook 上下文并生成策略建议。WorkflowRun 跟踪步骤；失败时记录当前步骤和错误。
+2. **策略与平台计划。** 用户可选择策略；代码也存在推荐策略回退。因此，当前实现并未强制要求每次都进行人工策略确认。
+3. **平台内容与编辑。** Writer 按平台生成内容块；编辑和最终版本选择通过新的 Artifact 保存。
+4. **发布准备。** 基于平台输出构建 Publishing Pack，整理最终素材与发布建议。
+5. **复盘与复用。** 手动输入表现数据，再通过规则更新用户记忆；策略和内容生成会读取这份记忆。
+
+这一结构把“生成”嵌入了完整任务流程。代码中的 Agent 是按职责组织的模块；不能据此推断存在自主规划、自动运营或已验证的智能体协作效果。
+
+## 实际交付：当前源码支持哪些结论
+
+早期 MVP_STATUS 文档仍把 Performance Review、User Memory 和真实模型网关列为未实现；当前快照已包含相应模块与页面接线。本案例以当前源码为准，将其归类为“代码已存在”，不把旧文档或代码存在当作运行验收结论。
+
+模型网关默认走 Mock；配置不足或请求失败会回退。兼容 Provider 包含超时与部分请求格式重试，Brief 和平台输出有结构检查及规则回退。这里可以确认适配路径存在，尚不能确认生产调用成功、所有结构都被严格校验，或降级状态在所有界面中被清楚提示。
+
+数据保存在浏览器 LocalStorage；Benchmark 使用 Seed 与自定义 Playbook，不是真实平台趋势采集。用户记忆来自人工数据和规则整理，不是模型训练，也不能视为多用户隔离系统。
+
+## 下一步验证与产品衡量
+
+优先验证从新建项目到编辑、刷新恢复、导出准备和复盘的完整路径；然后验证真实 Provider、异常恢复与降级可见性。面向生产还需要服务端密钥处理、认证和数据隔离，现有浏览器端配置方式尚不构成生产就绪方案。
+
+可沿用状态文档提出的“每周实际发布资产数”，并观察生成后发布率、输入到发布包的耗时和编辑量。这些是**待采集的验证指标**，不是已经取得的增长成果。
+
+## 归属与案例边界
+
+材料来自 Don 的 donsbox 账号下的 RELAY 工程（仓库名 aitnt）。仓库归属可以核实；Don 的具体产品职责、代码贡献与协作分工仍需补充。本页不将整个工程归为个人独立完成，也不声明已上线。

@@ -1,33 +1,11 @@
 ---
-import Card from '../Card.astro'
-import {PROFILE} from "../../content/profileData";
-import { getCollection } from "astro:content";
-
-
-const books = await getCollection('books');
-
-console.log(books);
+import { PROFILE } from "../../content/profileData";
+import type { Language } from "../../lib/i18n";
+interface Props { lang: Language; }
+const { lang } = Astro.props;
 ---
-
-  <div class="h-full">
-    <address class="mt-4 flex flex-col">
-      <h2 class="text-gray-500">Contact Details</h2>
-      <p>camiloplaza3@gmail.com</p>
-      <p>🇨🇴 Bogotá D.C, Colombia 🇨🇴</p>
-    </address>
-    <div class="mt-4 flex w-fit flex-col">
-      <h2 class="text-gray-500">Socials</h2>
-      <ul class="list-inside list-disc">
-        {books.map(
-          (book) => (
-            <li>
-              <a href={`/books/${book.data.slug}`} class="hover:font-bold underline">{book.data.title}</a>
-              <span class="text-sm font-thin italic">- {book.data.author}</span>
-            </li>
-          )
-        )}
-
-      </ul>
-    </div>
-  </div>
+<div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
+  <p class="max-w-2xl text-sm leading-7 text-muted-foreground">{PROFILE.locales[lang].contact}</p>
+  <a href={PROFILE.links.github} target="_blank" rel="noreferrer" class="w-fit shrink-0 rounded-xl bg-foreground px-5 py-3 text-sm font-medium text-background">GitHub ↗</a>
+</div>
 

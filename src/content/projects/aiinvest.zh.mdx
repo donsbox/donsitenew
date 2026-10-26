@@ -1,0 +1,77 @@
+---
+projectId: "aiinvest"
+title: "AIinvest / Market Event Canvas"
+stage: "specification"
+order: 2
+reviewedAt: "2026-10-26"
+repository: "https://github.com/donsbox/AIinvest"
+revision: "4de152caf98d7b0de5ade2f47d3583b6ff312a1f"
+repositoryAccess: "public"
+lang: "zh-CN"
+subtitle: "把事件研究拆解为可追踪的投资假设"
+description: "以 Market Event Canvas 规格为核心，将市场事件、情景分析、Thesis 和复盘连接起来。当前交付为产品定义、数据模型建议、分析 Schema 与工程规范，尚不是可运行的投研应用。"
+tags: ["问题定义","决策工作流","结构化 AI 输出"]
+deliverables: ["事件研究工作台的目标、范围、页面结构与核心用户流程规格。","Canvas、Thesis、Review 等数据对象及归属约束建议。","AIAnalysis JSON Schema、架构／AI／测试标准、提示词与交付文档基线。"]
+unverified: ["画布、行情数据、真实 AI 分析、持久化与账号隔离的应用实现。","构建、测试、部署及端到端验收的实际运行结果。","投资效果、用户规模、业务指标及个人职责分工。"]
+sources: [{"label":"研究工作台目标","path":"AI_Startup_OS_Baseline_v1 2/examples/market-event-canvas/PROJECT_GOAL.md"},{"label":"画布与情景产品规格","path":"AI_Startup_OS_Baseline_v1 2/examples/market-event-canvas/PRODUCT_SPEC.md"},{"label":"数据模型建议","path":"AI_Startup_OS_Baseline_v1 2/examples/market-event-canvas/DATA_MODEL.md"},{"label":"分层架构规范","path":"AI_Startup_OS_Baseline_v1 2/docs/02_architecture_standard.md"},{"label":"AI 与 Agent 规范","path":"AI_Startup_OS_Baseline_v1 2/docs/05_ai_agent_standard.md"},{"label":"测试与验收规范","path":"AI_Startup_OS_Baseline_v1 2/docs/08_testing_standard.md"},{"label":"分析输出 JSON Schema","path":"AI_Startup_OS_Baseline_v1 2/schemas/ai-analysis.schema.json"},{"label":"工程任务清单","path":"AI_Startup_OS_Baseline_v1 2/TASKS.md"},{"label":"基线说明","path":"AI_Startup_OS_Baseline_v1 2/README.md"},{"label":"基线文件清单","path":"AI_Startup_OS_Baseline_v1 2/MANIFEST.md"}]
+---
+
+## 问题定义：资讯之间的关系，需要成为研究对象
+
+关注宏观、科技与半导体事件的投资者，不只需要事件日历，也需要记录“这个事件通过哪些变量影响哪些行业与标的”“什么结果支持或推翻当前判断”。单次问答难以保留这些关系，更难在事件发生后回看判断为何成立或失效。
+
+仓库中的 Market Event Canvas 示例规格将研究过程组织为事件、关系节点、情景、Thesis 和 Review。目标是保存推理链与验证条件，而不是提供自动下单或确定性收益承诺。
+
+## 目标用户、范围与非目标
+
+规格面向关注美股宏观、科技与半导体板块的中级投资者。MVP 目标包括未来七天事件、事件详情、分析画布、结构化 AI 分析、Watchlist、Thesis、Review，以及 Mock / Seed 模式和账号隔离要求。
+
+非目标明确排除自动下单、券商连接、高频信号、社区、跟单、完整回测和全球多资产。这些取舍使产品先聚焦“形成并回看研究假设”。以上均为规格范围，不能当作已经交付的应用能力。
+
+## 产品架构：围绕可保存的研究对象组织界面
+
+规格提出桌面三栏布局：左侧事件日历，中间分析画布，右侧 AI 分析器。
+
+| 对象 | 承载的信息 | 规格中的关键约束 |
+| --- | --- | --- |
+| MarketEvent / EventSource | 时间、共识、前值、实际值、行业、标的与来源 | 保留来源与更新时间 |
+| Canvas / Node / Edge | 事件、变量、行业、标的、风险与验证指标的关系 | 节点与边绑定 canvasId |
+| AIAnalysis | 情景、推断、证据与风险 | 记录模型、Prompt / Schema 版本与耗时 |
+| InvestmentThesis | 触发条件、失效条件、风险和观察周期 | 绑定 ownerId 并有明确状态 |
+| EventReview | 实际结果、市场反应与失败假设 | 绑定 ownerId，供事后复盘 |
+
+架构标准建议采用模块化单体：界面 → 应用服务 → 领域 → Repository / Provider Adapter → 数据库或外部 API。这是**架构建议**；当前仓库没有相应业务应用实现。
+
+## 工作流设计：从事件走向可证伪的判断
+
+1. **识别事件。** 从未来七天的重要事件中选择研究起点，并保留信息来源。
+2. **组织传导关系。** 将事件放入画布，连接结果、宏观变量、行业、标的与验证指标。
+3. **生成情景。** 规格要求 Bull / Base / Bear、预期差、传导路径、风险与失效条件。
+4. **保存 Thesis。** 记录触发条件、观察周期与风险；状态定义为 draft、watching、triggered、invalidated、completed。
+5. **事后 Review。** 对照实际结果和市场反应，记录实际情景及失败假设。
+
+这条闭环让“为什么这么判断”和“何时停止相信它”成为产品内的显式对象。当前只是设计意图，尚未通过用户使用或应用运行验证。
+
+## AI 输出：把事实、推断与失效条件分开
+
+已提交的 AIAnalysis JSON Schema 要求 summary、facts、inferences、risks 和 invalidation_conditions，并允许 recommended_checks。它提供结构契约，但不自动保证分析正确。
+
+更完整的 Bull / Base / Bear、概率和传导路径要求出现在示例产品规格中，尚未完整编码进这一 Schema。后续实现需要对齐两者，并验证无来源、数据冲突、无效 JSON、超时与 Mock 降级等情况。
+
+## 实际交付：产品规格与工程协作基线
+
+当前快照的实物交付是文档、Schema、提示词、检查清单和示例规格。AI_Startup_OS_Baseline 定义了产品原则、架构分层、数据规范、AI 边界、测试与发布门槛。TASKS 中的工程任务仍未勾选，顶层产品目标也保留了待填写内容。
+
+因此，适合展示的成果是：将研究场景拆成可讨论的产品对象、明确流程和验收标准，并提供后续开发的交接基础。现阶段不能据此声称已实现实时行情、真实 AI 研究、画布保存、登录隔离或生产部署。
+
+README 与 MANIFEST 提到了部分未出现在当前已跟踪文件树中的配置或目录；清单意图与实际文件存在性同样需要区分。
+
+## 下一步验证与产品衡量
+
+先补齐顶层项目定义，并使最小路径真正运行：选事件 → 建立关系 → 生成结构化分析 → 保存并恢复 Thesis → 创建 Review。再验证数据归属、来源可追溯性、模型异常与端到端测试。
+
+建议优先观察保存后完成复盘的 Thesis 比例、带明确失效条件的分析比例，以及用户能否重建自己的判断过程。这些是本案例提出的验证方向，不是仓库已记录的运营结果或投资收益。
+
+## 归属与案例边界
+
+材料来自 donsbox/AIinvest 的公开快照。本页分析已有规格与基线，不将其描述为完整投资产品。Don 对这些材料的具体职责与协作分工仍待确认。

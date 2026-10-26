@@ -10,7 +10,7 @@
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
-    --primary: 24.6 95% 53.1%;
+    --primary: 24.6 85% 37%;
     --primary-foreground: 60 9.1% 97.8%;
     --secondary: 60 4.8% 95.9%;
     --secondary-foreground: 24 9.8% 10%;
@@ -74,3 +74,15 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+a { text-underline-offset: 0.2em; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 4px; }
+.skip-link { position: absolute; top: -6rem; left: 1rem; z-index: 100; padding: 0.75rem 1rem; background: hsl(var(--foreground)); color: hsl(var(--background)); border-radius: 0.5rem; }
+.skip-link:focus { top: 1rem; }
+.prose { overflow-wrap: anywhere; }
+.prose table { display: block; max-width: 100%; overflow-x: auto; }
+.prose td, .prose th { min-width: 8rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

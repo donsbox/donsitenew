@@ -1,66 +1,30 @@
+// Personal information only. Project content lives in the projects collection.
+// Add an email or social profile only after Don confirms the public address.
 export const PROFILE = {
-  // 1. 基础 SEO
-  site: {
-    SEO: {
-      title: "DonBox | Product Manager",
-      description: "E-commerce PM | Economics & AI Enthusiast",
-    }
-  },
-
-  // 2. 核心个人信息
-  intro: {
-    name: "Don",
-    role: "Product Manager",
-    description: "Bridging the gap between Economic Logic and AI Innovation. Based in China, heading to New Zealand.",
-    avatar: "/avatar.jpg", 
-  },
-
-  // 3. 详细描述
-  about: {
-    description: "An INTJ Product Manager with a Management Master's and a Dual Degree in Economics. Specializing in AI-driven e-commerce optimization.",
-    location: "China / New Zealand",
-  },
-
-  // 4. 社交与链接
-  links: {
-    twitter: "https://twitter.com/zeroXall",
-    github: "https://github.com/donsbox",
-    linkedin: "https://linkedin.com/in/donlau",
-    mail: "mailto:your-email@example.com",
-  },
-  repo: "https://github.com/donsbox/donsitenew", 
-
-  // 5. 杂项
+  name: "Don",
   timezone: "Asia/Shanghai",
-  words: [
-    "Economic logic defines the floor, AI innovation defines the ceiling.",
-  ],
-
-  // 6. 核心数据盒（修复 .map 报错的关键：提供多重命名的空数组备份）
-  
-  // 项目 (兼容 projects / projectList)
-  projects: [
-    { title: "E-commerce Optimization", description: "AI data modeling", link: "#" }
-  ],
-  projectList: [],
-
-  // 经历 (兼容 experience / experiences / workExperience)
-  experience: [
-    { company: "E-commerce Firm", position: "PM", start: "2022", end: "Present", tasks: ["Strategy"] }
-  ],
-  experiences: [],
-  workExperience: [],
-
-  // 学历 (兼容 studies / education)
-  studies: [
-    { title: "Master in Management", institution: "University", start: "2021", end: "2023" },
-    { title: "Bachelor in Economics", institution: "University", start: "2017", end: "2021" }
-  ],
-  education: [],
-
-  // 书籍 (兼容 books / bookList)
-  books: [
-    { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki" }
-  ],
-  bookList: []
-};
+  links: { github: "https://github.com/donsbox" },
+  repo: "https://github.com/donsbox/donsitenew",
+  locales: {
+    "zh-CN": {
+      title: "Don · AI 产品经理作品集",
+      description: "Don 的产品作品集：从电商产品经验出发，探索 AI 产品架构、工作流设计与可核验的交付成果。包含 RELAY Social OS 和 AIinvest 中英文案例。",
+      role: "产品经理 · AI 工作流产品设计",
+      introduction: "把复杂问题，转化为可执行的 AI 工作流。",
+      summary: "从电商产品经验出发，关注 AI 如何进入真实工作：明确问题、组织上下文、保留人的判断，并让结果可以编辑、复用与验证。",
+      about: "我的方向是 AI 工作流产品设计。作品集围绕产品定义、系统边界、状态流转和交付质量展开，呈现源码支持的能力与仍需验证的假设。",
+      capabilities: ["问题定义与范围取舍", "产品架构与数据对象", "人机协作与工作流编排", "验收标准与反馈闭环"],
+      contact: "欢迎交流 AI 产品、创作者工具与工作流设计。可通过已确认的 GitHub 主页了解项目与联系入口。",
+    },
+    en: {
+      title: "Don · AI Product Portfolio",
+      description: "Don’s product portfolio: bringing e-commerce product experience to AI architecture, workflow design and verifiable delivery. Bilingual case studies of RELAY Social OS and AIinvest.",
+      role: "Product Manager · AI Workflow Design",
+      introduction: "Turning complex problems into actionable AI workflows.",
+      summary: "Building on e-commerce product experience, I explore how AI fits into real work: define the problem, organize context, preserve human judgment, and make outputs editable, reusable and testable.",
+      about: "My focus is AI workflow product design. These cases examine product definition, system boundaries, state transitions and delivery quality, separating source-backed capabilities from assumptions that still need validation.",
+      capabilities: ["Problem framing & scope", "Product architecture & data models", "Human–AI workflow orchestration", "Acceptance criteria & feedback loops"],
+      contact: "Let’s talk about AI products, creator tools and workflow design. My verified GitHub profile provides project information and contact options.",
+    },
+  },
+} as const;

@@ -1,0 +1,68 @@
+---
+projectId: "relay"
+title: "RELAY Social OS"
+stage: "prototype"
+order: 1
+reviewedAt: "2026-10-26"
+repository: "https://github.com/donsbox/aitnt"
+revision: "c2c2db85af18a9367d3b1b3b04956e43361e6b25"
+repositoryAccess: "restricted"
+lang: "en"
+subtitle: "An editable, reusable workflow for content production"
+description: "A workflow connecting source material, strategy, X / Xiaohongshu assets, publishing preparation and review. Source includes local persistence and model adapters; live-service performance and deployment remain unverified."
+tags: ["Workflow orchestration","Human–AI collaboration","Creator tools"]
+deliverables: ["React / TypeScript interfaces and source for analysis, strategy, platform output and publishing-pack workflows.","Local persistence for projects, artifacts and workflow runs, including output editing and final selection.","Code for manual performance reviews, rule-based memory, seed / custom playbooks and a model gateway."]
+unverified: ["Successful live-provider calls, output quality, cost and production reliability.","Authentication, cloud data isolation, live platform ingestion and automatic posting.","Real user outcomes, growth metrics and individual responsibilities."]
+sources: [{"label":"Content analysis & strategy workflow","path":"src/engine/workflow/runContentWorkflow.ts"},{"label":"Platform content generation","path":"src/engine/workflow/generatePlatformOutputs.ts"},{"label":"Editing & final selection","path":"src/engine/workflow/updatePlatformOutputs.ts"},{"label":"Publishing pack assembly","path":"src/engine/workflow/generatePublishingPack.ts"},{"label":"Performance review persistence","path":"src/engine/workflow/savePerformanceReview.ts"},{"label":"Memory updates from reviews","path":"src/engine/workflow/updateUserMemory.ts"},{"label":"Model gateway & fallback","path":"src/engine/llm/modelGateway.ts"},{"label":"Output shape validation","path":"src/engine/llm/validators.ts"},{"label":"Local storage adapter","path":"src/engine/storage/localStorageAdapter.ts"},{"label":"Playbook retrieval sources","path":"src/engine/benchmarks/playbookRepository.ts"},{"label":"Earlier status document (partly outdated)","path":"MVP_STATUS.md"}]
+---
+
+## Problem framing: more drafts do not complete the job
+
+Turning one source into content for X and Xiaohongshu requires different structures, levels of detail and interaction patterns. A single generation step can leave strategy, editing, publishing preparation and review disconnected. The next project then starts without a usable record of earlier decisions.
+
+RELAY organizes these activities around saved content assets rather than isolated chat responses. This product framing is an interpretation of the repository’s structure; no user-research study or measured effectiveness has been verified.
+
+## Scope and product decisions
+
+The generation workflow focuses on X and Xiaohongshu: retain a shared thesis, then adapt the output for each platform. Other platforms appear in types or interfaces, but that does not establish completed generation support.
+
+Human judgment remains in strategy selection, editing and final-version selection. A Publishing Pack assembles final material and publishing guidance. It is a preparation artifact, not evidence of a connected automatic-posting system.
+
+## Architecture: separate interaction, orchestration and artifacts
+
+| Layer | Objects or responsibilities | Product rationale |
+| --- | --- | --- |
+| Workspace | Intake, Strategy, Output Studio, Publishing Pack, Review, Benchmark Library | Guide users through a task rather than a collection of prompts |
+| Workflow | Parse input, create a brief, retrieve context, recommend strategy, create outputs and a pack | Make dependencies, progress and failure states explicit |
+| Domain assets | ContentProject, Artifact, WorkflowRun | Connect projects, generated results and run records |
+| Adapters | LocalStorage, playbooks, model gateway | Provide replaceable persistence and generation boundaries for a prototype |
+
+Artifact types cover briefs, strategies, platform plans, outputs, publishing packs, reviews and memory. Fields include a project ID, optional run ID, version and timestamps. One result can therefore become the next step’s input instead of disappearing into a conversation.
+
+## Workflow design: place judgment inside the process
+
+1. **Intake and analysis.** Source material, goals and platforms feed a brief, playbook retrieval and strategy recommendations. WorkflowRun tracks individual steps and records the active step on failure.
+2. **Strategy and planning.** Users can select a strategy, while the code also permits a recommended-strategy fallback. Explicit human strategy confirmation is therefore not enforced in every path.
+3. **Platform output and editing.** Writers create platform-specific content blocks. Edits and final selections are saved as new artifacts.
+4. **Publishing preparation.** The pack builder assembles final assets and guidance from the saved outputs.
+5. **Review and reuse.** Manually entered performance data updates rule-based user memory, which is read by later strategy and writing steps.
+
+The agents are responsibility-specific modules. Their presence does not establish autonomous planning, automatic account operation or proven multi-agent performance.
+
+## Delivered artifacts and implementation boundaries
+
+The earlier MVP_STATUS document still lists Performance Review, User Memory and a real-provider gateway as unimplemented. The inspected snapshot contains those modules and page wiring. This case follows current source and classifies them as code present, without treating either source or documentation as a runtime acceptance result.
+
+The gateway defaults to mock generation and falls back when configuration is incomplete or requests fail. The compatible provider contains timeout handling and limited request-format retry. Brief and platform-output paths include shape checks and rule-based fallback. This establishes an integration path, not successful production calls, exhaustive validation or consistently visible fallback states.
+
+Persistence uses browser LocalStorage. Benchmarks come from seed and custom playbooks, not verified live trend ingestion. Memory is assembled from manually supplied data and rules; it is neither model training nor a multi-user isolation mechanism.
+
+## Validation plan and product measures
+
+First validate the complete path from intake through editing, refresh recovery, publishing preparation and review. Then test a real provider, failure recovery and visible fallback behavior. Production readiness also requires server-side credential handling, authentication and data isolation; browser-side provider configuration does not establish that readiness.
+
+The status document proposes weekly actually published assets as a north-star measure. Publication rate after generation, time to publishing pack and edit volume would help evaluate usefulness. These are **proposed measurements**, not reported growth results.
+
+## Attribution and case boundaries
+
+The engineering material is in Don’s donsbox account, in the repository named aitnt. Repository ownership is verifiable; Don’s specific product responsibilities, code contributions and collaboration boundaries remain to be confirmed. This case does not attribute the entire implementation to one person or claim a live launch.

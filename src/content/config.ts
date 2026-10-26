@@ -1,64 +1,27 @@
-// Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
-// Define a `type` and `schema` for each collection
-const projectCollection = defineCollection({
+
+const projects = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string(),
-    startDate: z.date(),
-    description: z.string(),
-    image: z
-      .object({
-        url: z.string(),
-        alt: z.string(),
-      })
-      .optional(),
-    tags: z.array(z.string()).optional(),
+    projectId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    lang: z.enum(["zh-CN", "en"]),
+    title: z.string().min(1),
+    subtitle: z.string().min(1),
+    description: z.string().min(1),
+    stage: z.enum(["prototype", "specification"]),
+    order: z.number().int(),
+    reviewedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    repository: z.string().url(),
+    revision: z.string().regex(/^[a-f0-9]{40}$/),
+    repositoryAccess: z.enum(["public", "restricted"]),
+    tags: z.array(z.string()).min(1),
+    deliverables: z.array(z.string()).min(1),
+    unverified: z.array(z.string()).min(1),
+    sources: z.array(z.object({
+      label: z.string().min(1),
+      path: z.string().min(1),
+    })).min(1),
   }),
 });
 
-const experienceCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    startDate: z.date(),
-    endDate: z.date().optional(),
-    company: z.string(),
-    tags: z.array(z.string()).optional(),
-  }),
-});
-
-const bookCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    readYear: z.number(),
-    author: z.string(),
-    tags: z.array(z.string()).optional(),
-  }),
-});
-
-const postCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    startDate: z.date(),
-    description: z.string(),
-    image: z
-      .object({
-        url: z.string(),
-        alt: z.string(),
-      })
-      .optional(),
-    tags: z.array(z.string()).optional(),
-    canonical: z.string().optional(),
-  }),
-});
-
-// Export a single `collections` object to register your collection(s)
-export const collections = {
-  projects: projectCollection,
-  experiences: experienceCollection,
-  books: bookCollection,
-  posts: postCollection,
-};
+export const collections = { projects };

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f5f0"/>
+  <rect x="48" y="48" width="1104" height="534" rx="32" fill="#fff" stroke="#dedbd3" stroke-width="2"/>
+  <rect x="88" y="88" width="64" height="64" rx="18" fill="#15171b"/>
+  <text x="103" y="133" fill="#f7f5f0" font-family="DejaVu Sans, sans-serif" font-size="38" font-weight="bold">D.</text>
+  <text x="176" y="131" fill="#97400e" font-family="DejaVu Sans, sans-serif" font-size="24">DON / PRODUCT PORTFOLIO</text>
+  <text x="88" y="263" fill="#15171b" font-family="DejaVu Sans, sans-serif" font-size="68" font-weight="bold">AI workflows.</text>
+  <text x="88" y="343" fill="#15171b" font-family="DejaVu Sans, sans-serif" font-size="68" font-weight="bold">From problem to product.</text>
+  <text x="88" y="404" fill="#66635e" font-family="DejaVu Sans, sans-serif" font-size="24">Product architecture / Human judgment / Verifiable delivery</text>
+  <path d="M88 450h1024" stroke="#dedbd3" stroke-width="2"/>
+  <text x="88" y="512" fill="#15171b" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="bold">RELAY Social OS</text>
+  <text x="420" y="512" fill="#66635e" font-family="DejaVu Sans, sans-serif" font-size="21">Source-code prototype</text>
+  <text x="730" y="512" fill="#15171b" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="bold">AIinvest</text>
+  <text x="884" y="512" fill="#66635e" font-family="DejaVu Sans, sans-serif" font-size="21">Specification</text>
+</svg>

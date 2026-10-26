@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Projects from "./sections/Projects.astro";
+import { PROFILE } from "../content/profileData";
+import { labels, projectsPath, type Language } from "../lib/i18n";
+interface Props { lang: Language; }
+const { lang } = Astro.props;
+const t = labels[lang];
+const description = lang === "en"
+  ? "Two perspectives on AI product work: an editable content workflow and an event-driven research specification. Each case separates delivered artifacts from unverified capabilities."
+  : "从内容生产工作流到事件驱动研究规格，展示 AI 产品的问题定义、架构取舍与交付物，并明确尚待验证的能力。";
+---
+<BaseLayout lang={lang} title={`${t.projects} · ${PROFILE.name}`} description={description} alternatePaths={{ "zh-CN": projectsPath("zh-CN"), en: projectsPath("en") }}>
+  <main id="main-content" class="mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-16">
+    <h1 class="text-4xl font-semibold tracking-tight">{t.projects}</h1>
+    <p class="mb-10 mt-5 max-w-3xl text-base leading-8 text-muted-foreground">{description}</p>
+    <Projects lang={lang} />
+  </main>
+</BaseLayout>
